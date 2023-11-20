@@ -5,15 +5,19 @@ const cors = require('cors');
 const morgan = require('morgan');
 const methodOverride = require('method-override');
 
+// Models
+const Entry = require('./models/entry');
+const Word = require('./models/word');
+
 const app = express();
 
 // Application Settings
 require("dotenv").config();
 
-const { PORT = 3001, DATABASE_URI } = process.env;
+const { PORT = 3001, DATABASE_URL } = process.env;
 
 // Database Connection
-mongoose.connect(DATABASE_URI);
+mongoose.connect(DATABASE_URL);
 
 mongoose.connection
     .on('open', () => console.log('You are connected to MongoDB'))

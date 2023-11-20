@@ -1,14 +1,16 @@
 // Dependencies
-const mongoose = require('mongoose');
 const express = require('express');
+const mongoose = require('mongoose');
 const cors = require('cors');
 const morgan = require('morgan');
 const methodOverride = require('method-override');
 
-// Models
+// Model
 const Entry = require('./models/entry');
-const Word = require('./models/word');
+// connect Entries Controller
+const entriesRouter = require('./controllers/entries');
 
+// initialize app
 const app = express();
 
 // Application Settings
@@ -17,6 +19,7 @@ require("dotenv").config();
 const { PORT = 3001, DATABASE_URL } = process.env;
 
 // Database Connection
+mongoose.set('strictQuery', true);
 mongoose.connect(DATABASE_URL);
 
 mongoose.connection
@@ -34,9 +37,10 @@ app.use(methodOverride('_method'));
 // Mount Routes
 // test route
 app.get('/', (req, res) => {
-    res.send('hello world');
+    res.send('Welcome to Deckled Edge - Let us write!');
 });
-
+// mount routes
+app.use(entriesRouter);
 
 // Tell app to listen
 app.listen(PORT, () => {

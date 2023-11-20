@@ -1,6 +1,9 @@
 // Dependencies
 const mongoose = require('mongoose');
 const express = require('express');
+const cors = require('cors');
+const morgan = require('morgan');
+const methodOverride = require('method-override');
 
 const app = express();
 
@@ -17,11 +20,12 @@ mongoose.connection
     .on('close', () => console.log('You are disconnected from MongoDB'))
     .on('error', (error) => console.log(`MongoDB Error: ${error.message}`));
 
-// Models
 
 // Mount Middleware 
-
 app.use(express.json());
+app.use(cors());
+app.use(morgan('dev'));
+app.use(methodOverride('_method'));
 
 // Mount Routes
 // test route

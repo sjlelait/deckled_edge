@@ -13,15 +13,20 @@ router.get('/read', async (req, res) => {
     }
 });
 
-// NEW (form)
+// NEW
 
 // DELETE
 
 // UPDATE
 
-
 // CREATE
-router.post("/")
+router.post('/read', async (req, res) => {
+    try {
+        res.status(201).json(await Entry.create(req.body));
+    } catch (error) {
+        res.status(400).json({ message: 'something went wrong' });
+    }
+});
 
 // EDIT
 

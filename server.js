@@ -14,7 +14,7 @@ const entriesRouter = require('./controllers/entries');
 const app = express();
 
 // Application Settings
-require("dotenv").config();
+require('dotenv').config();
 
 const { PORT = 3001, DATABASE_URL } = process.env;
 
@@ -37,7 +37,7 @@ app.use(methodOverride('_method'));
 // Mount Routes
 // test route
 app.get('/home', (req, res) => {
-    res.send("welcome to deckled edge!");
+    res.send('welcome to deckled edge!');
 });
 
 // home route - public
@@ -45,7 +45,7 @@ app.get('/', async (req, res) => {
     try {
         res.status(200).json(await Entry.find({ public: true }));
     } catch (error) {
-        res.status(400).json({ message: "something went wrong" });
+        res.status(400).json({ message: 'something went wrong' });
     }
 });
 // mount routes

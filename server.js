@@ -36,8 +36,17 @@ app.use(methodOverride('_method'));
 
 // Mount Routes
 // test route
-app.get('/', (req, res) => {
-    res.send('Welcome to Deckled Edge - Let us write!');
+app.get('/home', (req, res) => {
+    res.send("welcome to deckled edge!");
+});
+
+// home route - public
+app.get('/', async (req, res) => {
+    try {
+        res.status(200).json(await Entry.find({ public: true }));
+    } catch (error) {
+        res.status(400).json({ message: "something went wrong" });
+    }
 });
 // mount routes
 app.use(entriesRouter);

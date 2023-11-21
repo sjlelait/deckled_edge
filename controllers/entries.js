@@ -4,7 +4,8 @@ const Entry = require('../models/entry');
 const Word = require('../models/word');
 
 // INDEX
-router.get("/read", async (req, res) => {
+// read (logged in)
+router.get('/read', async (req, res) => {
     try {
         res.status(200).json(await Entry.find({}));
     } catch (error) {
@@ -12,17 +13,15 @@ router.get("/read", async (req, res) => {
     }
 });
 
-// NEW
-
+// NEW (form)
 
 // DELETE
-
 
 // UPDATE
 
 
 // CREATE
-
+router.post("/")
 
 // EDIT
 

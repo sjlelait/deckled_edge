@@ -13,7 +13,7 @@ router.get('/read', async (req, res) => {
     }
 });
 
-// NEW
+// NEW - probably front end routing with form
 
 // DELETE
 router.delete('/read/:id', async (req, res) => {
@@ -38,5 +38,14 @@ router.post('/read', async (req, res) => {
 
 
 // SHOW
+router.get('/read/:id', async (req, res) => {
+    try {
+        const entry = await Entry.findById({ _id: req.params.id });
+        res.status(200).json(entry);
+    } catch (error) {
+        res.status(400).json({ message: 'something went wrong' });
+    }
+});
+
 
 module.exports = router;

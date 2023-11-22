@@ -24,8 +24,7 @@ router.delete('/read/:id', async (req, res) => {
         res.status(400).json({ message: 'something went wrong' });
     }
 });
-// UPDATE - needs working on
-
+// UPDATE 
 router.put('/read/:id', async (req, res) => {
     try {
         const entry = await Entry.findByIdAndUpdate(req.params.id, req.body, { new: true });
@@ -45,7 +44,17 @@ router.post('/read', async (req, res) => {
     }
 });
 
-// EDIT
+// EDIT - GET route to read/:id for editing - THIS NEEDS WORK
+/*
+router.get('read/:id/edit', async (req, res) => {
+    try {
+        const entry = Entry.findById(req.params.id);
+        res.status(200).json(entry);
+    } catch (error) {
+        res.status(400).json({ message: 'something went wrong' });
+    }
+});
+*/
 
 
 // SHOW

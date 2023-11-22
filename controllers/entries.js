@@ -25,17 +25,16 @@ router.delete('/read/:id', async (req, res) => {
     }
 });
 // UPDATE - needs working on
-/*
+
 router.put('/read/:id', async (req, res) => {
     try {
-        const entry = await Entry.findById(req.params.id);
-        res.status(201).json(await Entry.findByIdAndUpdate(req.params.id, req.body, { new: true })
-        );
+        const entry = await Entry.findByIdAndUpdate(req.params.id, req.body, { new: true });
+        res.status(201).json(entry)
     } catch (error) {
         res.status(400).json({ message: 'something went wrong' });
     }
 });
-*/
+
 
 // CREATE
 router.post('/read', async (req, res) => {

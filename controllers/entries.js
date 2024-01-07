@@ -38,7 +38,8 @@ router.put('/read/:id', async (req, res) => {
 // CREATE
 router.post('/read', async (req, res) => {
     try {
-        res.status(201).json(await Entry.create(req.body));
+        const newEntry = await Entry.create(req.body);
+        res.status(201).json(newEntry);
     } catch (error) {
         res.status(400).json({ message: 'something went wrong' });
     }

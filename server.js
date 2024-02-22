@@ -68,6 +68,13 @@ app.use(async function (req, res, next) {
     next();
 });
 
+function isAuthenticated(req, res, next) {
+    if (!req.user) {
+        return res.status(401).send('you must be logged in first');
+    }
+    next();
+}
+
 // Mount Routes
 
 // test route
@@ -84,7 +91,7 @@ app.get('/', async (req, res) => {
     }
 });
 // mount routes
-app.use(entriesRouter);
+app.use(isAuthenticated, entriesRouter);
 
 // Tell app to listen
 app.listen(PORT, () => {

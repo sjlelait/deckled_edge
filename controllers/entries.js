@@ -18,7 +18,7 @@ router.get('/read', async (req, res) => {
 // DELETE
 router.delete('/read/:id', async (req, res) => {
     try {
-        const entry = await Entry.findByIdAndDelete(req.params.id);
+        const entry = await Entry.findByIdAndDelete(req.params.id, { createdBy: req.user.uid });
         res.status(200).json(entry);
     } catch (error) {
         res.status(400).json({ message: 'something went wrong' });
@@ -62,7 +62,7 @@ router.get('read/:id/edit', async (req, res) => {
 // SHOW
 router.get('/read/:id', async (req, res) => {
     try {
-        const entry = await Entry.findById({ _id: req.params.id });
+        const entry = await Entry.findById({ _id: req.params.id, createdBy: req.user.uid });
         res.status(200).json(entry);
     } catch (error) {
         res.status(400).json({ message: 'something went wrong' });

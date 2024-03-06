@@ -7,7 +7,7 @@ const Word = require('../models/word');
 // read (logged in)
 router.get('/read', async (req, res) => {
     try {
-        res.status(200).json(await Entry.find({}));
+        res.status(200).json(await Entry.find({ createdBy: req.user.uid }));
     } catch (error) {
         res.status(400).json({ message: 'something went wrong' });
     }
@@ -38,6 +38,7 @@ router.put('/read/:id', async (req, res) => {
 // CREATE
 router.post('/read', async (req, res) => {
     try {
+        req.body.createdBy = req.user.uid; // frebase association
         const newEntry = await Entry.create(req.body);
         res.status(201).json(newEntry);
     } catch (error) {

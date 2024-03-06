@@ -4,6 +4,7 @@ const mongoose = require('mongoose');
 const cors = require('cors');
 const morgan = require('morgan');
 const methodOverride = require('method-override');
+const { getAuth } = require("firebase-admin/auth");
 
 // Model
 const Entry = require('./models/entry');
@@ -13,7 +14,6 @@ const entriesRouter = require('./controllers/entries');
 // initialize app
 const app = express();
 const admin = require("firebase-admin");
-const { getAuth } = require("firebase-admin/auth");
 
 // Application Settings
 require('dotenv').config();
@@ -22,7 +22,8 @@ const { PORT = 3001,
     DATABASE_URL,
     GOOGLE_PRIVATE_KEY_ID,
     GOOGLE_PRIVATE_KEY,
-    GOOGLE_CLIENT_ID } = process.env;
+    GOOGLE_CLIENT_ID
+} = process.env;
 
 admin.initializeApp({
     credential: admin.credential.cert({
